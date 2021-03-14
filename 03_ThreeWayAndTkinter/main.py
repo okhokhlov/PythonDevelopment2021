@@ -1,6 +1,6 @@
 import random
 import tkinter as tk
-
+from tkinter import messagebox as mb
 
 class Game(tk.Frame):
 	def __init__(self, master=None, board_h=4, board_w=4):
@@ -54,8 +54,8 @@ class Game(tk.Frame):
 							self.win_state = self.win_state and ([row,col] == cur_pos)
 
 				if self.win_state:
-					print("THIS IS WIN")
-					assert False
+					mb.showinfo("", "You win!!!")
+					self.new_game()
 
 		return f
 
@@ -66,7 +66,7 @@ class Game(tk.Frame):
 		board = [[i * self.board_h + j + 1 for j in range(self.board_w)] for i in range(self.board_h)]
 		free_pos = [self.board_h - 1, self.board_w - 1]
 
-		for i in range(100):
+		for i in range(10):
 			possible_moves = []
 			for i in [(0,1), (1,0), (0,-1), (-1,0)]:
 				if (self.board_h > i[0] + free_pos[0] >= 0) and (self.board_w > i[1] + free_pos[1] >= 0):
