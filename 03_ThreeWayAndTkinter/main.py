@@ -29,10 +29,10 @@ class Game(tk.Frame):
 					self.numbers[i][j] = tk.Button(self, text=f'{i*self.board_w + j + 1}', command=self.button_command(i, j))
 					self.numbers[i][j].grid(row=i, column=j, sticky='NSEW')
 
-		self.quit_button = tk.Button(self, text='Quit', command=self.quit)
+		self.quit_button = tk.Button(self, text='Exit', command=self.quit)
 		self.quit_button.grid(row=self.board_h, column=0, sticky='NSEW')
 
-		self.new_game_button = tk.Button(self, text='Ne', command=self.new_game)
+		self.new_game_button = tk.Button(self, text='New game', command=self.new_game)
 		self.new_game_button.grid(row=self.board_h, column=self.board_w - 1, sticky='NSEW')
 
 		self.new_game()
