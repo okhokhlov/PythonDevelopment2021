@@ -5,10 +5,19 @@ import tkinter as tk
 class Game(tk.Frame):
 	def __init__(self, master=None, board_h=4, board_w=4):
 		tk.Frame.__init__(self, master)
-		self.grid()
+		self.grid(sticky='NSEW')
 
 		self.board_h = board_h
 		self.board_w = board_w
+
+		top=self.winfo_toplevel()
+		top.rowconfigure(0, weight=1)
+		top.columnconfigure(0, weight=1)
+
+		for i in range(self.board_w):
+			self.columnconfigure(i, weight=1)
+		for i in range(self.board_h + 1):
+			self.rowconfigure(i, weight=1)
 
 		self.numbers = [[None for j in range(self.board_w)] for i in range(self.board_h)]
 		self.free_pos = [self.board_h - 1, self.board_w - 1]
@@ -17,17 +26,17 @@ class Game(tk.Frame):
 			for j in range(self.board_w):
 				if not (i == (self.board_h - 1) and j == (self.board_w - 1)):
 					self.numbers[i][j] = tk.Button(self, text=f'{i*self.board_w + j}', command=self.button_command(i, j))
-					self.numbers[i][j].grid(row=i, column=j)
+					self.numbers[i][j].grid(row=i, column=j, sticky='NSEW')
 
 		self.quit_button = tk.Button(self, text='Quit', command=self.quit)
-		self.quit_button.grid(row=self.board_h, column=0)
+		self.quit_button.grid(row=self.board_h, column=0, sticky='NSEW')
 
 
 	def button_command(self, i, j):
 		def f():
 			cur_pos = [self.numbers[i][j].grid_info()["row"], self.numbers[i][j].grid_info()["column"]]
 			if (cur_pos[0] - self.free_pos[0]) ** 2 + (cur_pos[1] - self.free_pos[1]) ** 2 == 1:
-				self.numbers[i][j].grid(row=self.free_pos[0], column=self.free_pos[1])
+				self.numbers[i][j].grid(row=self.free_pos[0], column=self.free_pos[1], sticky='NSEW')
 				self.free_pos = cur_pos
 		return f
 
