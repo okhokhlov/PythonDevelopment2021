@@ -16,7 +16,7 @@ class Game(tk.Frame):
 		top.columnconfigure(0, weight=1)
 
 		for i in range(self.board_w):
-			self.columnconfigure(i, weight=1)
+			self.columnconfigure(i, weight=1, uniform="ttt")
 		for i in range(self.board_h + 1):
 			self.rowconfigure(i, weight=1)
 
